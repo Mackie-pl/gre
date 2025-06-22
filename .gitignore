@@ -1,0 +1,68 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+
+# dotenv and config files
+*.env
+*.env.*
+
+# VS Code settings
+.vscode/
+
+# Logs
+*.log
+
+# Cache & coverage
+.cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+*.cover
+.pytest_cache/
+
+# Test output
+junit*.xml
+test-results/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+MANIFEST
+
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# pylint
+.pylint.d/
+
+# pyright
+pyrightconfig.json
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Editor backup/temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# mydata temp files
+mydata.dat
+mydata.dir
+mydata.bak
+ 

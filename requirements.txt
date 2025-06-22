@@ -1,0 +1,22 @@
+# Core dependencies
+langchain>=0.2.0
+langgraph>=0.2.0
+qdrant-client>=1.8.0
+sentence-transformers>=2.4.0
+streamlit>=1.30.0
+
+# Common utilities
+pillow>=10.2.0
+requests>=2.31.0
+numpy>=1.26.0
+pandas>=2.1.0
+tqdm>=4.66.0
+python-dotenv>=1.0.0
+
+# For AI models
+transformers>=4.36.0
+torch>=2.2.0
+
+# For image captioning
+timm>=0.9.0
+fairscale>=0.4.0
