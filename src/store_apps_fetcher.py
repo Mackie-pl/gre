@@ -43,7 +43,7 @@ class StoreAppsFetcher:
     def fetch_games(
         self,
         category: str | list[str] = "GAME",
-        url_path: str | list[str] = url_paths[0],
+        url_path: str | list[str] = url_paths[0]["value"],
     ) -> List[Dict[str, Any]]:
         """
         Fetch games from the Google Play Store.
@@ -57,7 +57,7 @@ class StoreAppsFetcher:
         """
         print("Fetching games from Google Play Store...")
 
-        games = []
+        games: List[Dict[str, Any]] = []
         page_size = 200
 
         cat_list = [category] if isinstance(category, str) else category
@@ -119,7 +119,7 @@ class StoreAppsFetcher:
             "limit": page_size,
         }
 
-        headers = {}
+        headers: Dict[str, str] = {}
         if self.api_key:
             headers["x-rapidapi-key"] = self.api_key
             headers["x-rapidapi-host"] = "store-apps.p.rapidapi.com"
@@ -268,7 +268,7 @@ class StoreAppsFetcher:
                 ),
             )
 
-            app_id = game.get("app_id")
+            # app_id = game.get("app_id")
 
         # Commit and close
         con.commit()
@@ -293,8 +293,8 @@ class StoreAppsFetcher:
 if __name__ == "__main__":
     # Example usage
     fetcher = StoreAppsFetcher()
-    games = fetcher.fetch_games(
-        limit=200, category=fetcher.game_main_category, url_path=fetcher.url_paths[0]
+    games: List[Dict[str, Any]] = fetcher.fetch_games(
+        category=fetcher.game_main_category, url_path=fetcher.url_paths[0]["value"]
     )
     # fetcher.save_games_to_file(games, "data/games.json")
     fetcher.save_games_to_db(games)

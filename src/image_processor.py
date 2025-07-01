@@ -13,6 +13,7 @@ from tqdm import tqdm
 import time
 import json
 from db_connector import DBConnector
+from streamlit import progress
 
 
 # We'll use a pretrained model for image captioning
@@ -81,7 +82,7 @@ class ScreenshotProcessor:
         self.captioner = ImageCaptioner()
 
     def process_game_screenshots(
-        self, games: List[Dict[str, Any]]
+        self, games: List[Dict[str, Any]], progress_bar: Optional[progress] = None
     ) -> List[Dict[str, Any]]:
         """
         Process screenshots for a list of games.
@@ -125,6 +126,9 @@ class ScreenshotProcessor:
 
             # game["screenshot_captions"] = captions
             DBConnector().add_data_to_game(game_id, {"screenshot_captions": captions})
+            progress_bar.progress(
+                (i + 1) / len(games), text="Processing screenshots..."
+            )
 
         return games
 

@@ -21,6 +21,18 @@ class DBConnector:
 
         return games
 
+    def load_games_without_screenshot_captions(self) -> List[Dict[str, Any]]:
+        con = sqlite3.connect(DBConnector.filepath)
+        con.row_factory = sqlite3.Row
+        cursor = con.cursor()
+
+        cursor.execute("SELECT * FROM apps WHERE screenshot_captions IS NULL")
+        games = cursor.fetchall()
+
+        con.close()
+
+        return games
+
     def add_games(self, games: List[Dict[str, Any]]):
         con = sqlite3.connect(DBConnector.filepath)
         cursor = con.cursor()
@@ -90,6 +102,8 @@ class DBConnector:
         values = []
         for column_name, value in data.items():
             set_clauses.append(f"{column_name} = ?")
+            if isinstance(value, list):
+                value = json.dumps(value)
             values.append(value)
 
         # Add app_id to values for WHERE clause
@@ -101,3 +115,21 @@ class DBConnector:
 
         con.commit()
         con.close()
+
+    def get_count(self) -> int:
+        con = sqlite3.connect(DBConnector.filepath)
+        cursor = con.cursor()
+        cursor.execute("SELECT COUNT(*) FROM apps")
+        count = cursor.fetchone()[0]
+        con.close()
+        return count
+
+    def get_count_with_screenshot_captions(self) -> int:
+        con = sqlite3.connect(DBConnector.filepath)
+        cursor = con.cursor()
+        cursor.execute(
+            "SELECT COUNT(*) FROM apps WHERE screenshot_captions IS NOT NULL"
+        )
+        count = cursor.fetchone()[0]
+        con.close()
+        return count

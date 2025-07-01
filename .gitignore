@@ -65,4 +65,5 @@ pyrightconfig.json
 mydata.dat
 mydata.dir
 mydata.bak
- 
+data/
+qdrant_data/

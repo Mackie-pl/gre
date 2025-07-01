@@ -2,7 +2,7 @@ version: "3"
 
 services:
   qdrant:
-    image: qdrant/qdrant:v1.8.0
+    image: qdrant/qdrant:v1.14.1
     ports:
       - "6333:6333"
       - "6334:6334"
@@ -36,4 +36,6 @@ services:
     ports:
       - "8000:8000"
     ipc: host
-    command: --model HuggingFaceTB/SmolVLM2-2.2B-Instruct
+    # command: --model HuggingFaceTB/SmolVLM2-2.2B-Instruct
+    # command: --model microsoft/Phi-3.5-vision-instruct --max-model-len 4096 --trust-remote-code --limit-mm-per-prompt image=2
+    command: --model google/gemma-3-4b-it --max-model-len 4096 --trust-remote-code --limit-mm-per-prompt image=3
